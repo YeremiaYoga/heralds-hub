@@ -77,7 +77,7 @@ export default function DesktopUI() {
         </legend>
 
         <div className="flex-1 flex items-center justify-center">
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-36 text-center z-10 relative place-items-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-30 text-center z-10 relative place-items-center">
             {apps.map((app, index) => (
               <a
                 href={app.link}
@@ -90,7 +90,7 @@ export default function DesktopUI() {
                 rel="noopener noreferrer"
               >
                 <div
-                  className={`w-60 h-60 flex items-center justify-center relative ${
+                  className={`w-50 h-50 flex items-center justify-center relative ${
                     app.glitch
                       ? ""
                       : "rounded-lg border-2 border-blue-800 bg-[#1c2f47] shadow-md group-hover:ring-2"
@@ -105,7 +105,7 @@ export default function DesktopUI() {
                       src={app.icon}
                       alt={app.label}
                       className={`object-contain ${
-                        app.glitch ? "w-62 h-62" : "w-50 h-50"
+                        app.glitch ? "w-50 h-50" : "w-40 h-40"
                       }`}
                     />
                   )}
