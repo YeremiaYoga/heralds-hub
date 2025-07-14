@@ -3,8 +3,18 @@
 import { useEffect, useRef, useState } from "react";
 import { Coffee } from "lucide-react";
 import MilitaryClock from "@/components/MilitaryClock";
+import GlitchEffect from "@/components/GlitchEffect";
 
+import LayeredBackground from "@/components/LayeredBackground";
+import { apps } from "@/data/apps";
+
+import { fetchApps } from "@/lib/jsonbin";
 export default function DesktopUI() {
+  const [apps, setApps] = useState([]);
+
+  useEffect(() => {
+    fetchApps().then(setApps);
+  }, []);
   const audioRef = useRef(null);
 
   const [hasInteracted, setHasInteracted] = useState(false);
@@ -32,35 +42,6 @@ export default function DesktopUI() {
     setTimeout(() => setShowError(false), 5000);
   };
 
-  const apps = [
-    {
-      icon: "/assets/tales_of_dasaron_icon.png",
-      label: "Tales_of_Dasaron.exe",
-      link: "https://2024.TalesofDasaron.Web.id",
-    },
-    {
-      icon: "/assets/ignite_icon.png",
-      label: "Ignite.exe",
-      link: "https://Igniteproject.web.id",
-    },
-    {
-      icon: "/assets/6_star.png",
-      label: "Compodium.dll",
-      link: "https://heraldcompodium.blogspot.com",
-    },
-    {
-      icon: "/assets/admin_log_icon.png",
-      label: "Admin_Notes.log",
-      link: "https://admin.talesofdasaron.web.id",
-    },
-    {
-      icon: "/assets/glitch_error_icon.png",
-      label: "❐❑❏❏❒❒█▊▋▌▇❐❑❒❒",
-      link: "",
-      glitch: true,
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0b1a2d] via-[#1a2d47] to-[#2c1a3f] text-white flex items-center justify-center">
       <audio
@@ -70,8 +51,14 @@ export default function DesktopUI() {
         loop
         hidden
       />
-
-      <fieldset className="relative w-[90vw] h-[90vh]  bg-gradient-to-br from-[#0a121ecc] via-[#101f33cc] to-[#1a1c2fcc] border-4 border-yellow-400 rounded-xl shadow-2xl px-6 py-8 backdrop-blur-sm overflow-hidden flex flex-col">
+      <div className="absolute inset-0 z-50 pointer-events-none">
+        <GlitchEffect />
+      </div>
+      <div className="absolute inset-0 z-50 pointer-events-none">
+        <GlitchEffect side="right" />
+      </div>
+      <fieldset className="relative w-[90vw] h-[90vh] border-4 border-yellow-400 rounded-xl shadow-2xl px-6  backdrop-blur-sm overflow-hidden flex flex-col">
+        <LayeredBackground />
         <legend className="px-4 text-yellow-300 font-bold text-2xl">
           Tales of Dasaron
         </legend>
@@ -131,19 +118,22 @@ export default function DesktopUI() {
           </div>
         </div>
 
-        <div className="absolute bottom-2 left-0 right-0 flex items-center justify-between px-4 text-sm border-t border-blue-800 pt-2 z-10">
-          <div className="text-yellow-400 font-bold">
-            <MilitaryClock />
+        <div className="absolute bottom-2 left-0 right-0 px-4 text-sm border-t border-blue-800 pt-2 z-10">
+          <div className="relative w-full h-full flex justify-end items-center">
+            <div className="absolute left-1/2 transform -translate-x-1/2 text-yellow-400 font-bold">
+              <MilitaryClock />
+            </div>
+
+            <a
+              href="https://ko-fi.com/candlenote"
+              className="flex items-center gap-2 border border-yellow-400 px-4 py-2 rounded hover:bg-yellow-400 hover:text-black transition font-semibold text-2xl"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Coffee size={24} />
+              <span>Kofi</span>
+            </a>
           </div>
-          <a
-            href="https://ko-fi.com/candlenote"
-            className="flex items-center gap-2 border border-yellow-400 px-4 py-2 rounded hover:bg-yellow-400 hover:text-black transition font-semibold text-2xl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Coffee size={24} />
-            <span>Kofi</span>
-          </a>
         </div>
       </fieldset>
       {showError && (

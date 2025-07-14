@@ -19,7 +19,7 @@ export default function MilitaryClock() {
   }, []);
 
   return (
-    <div className="flex items-center gap-2 text-red-500 font-bold text-2xl">
+    <div className="flex items-center gap-2 text-red-500 font-bold text-2xl ">
       <Clock size={24} />
       {time} 
     </div>

@@ -1,0 +1,12 @@
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.twinkle-stars {
+  animation: twinkle 4s ease-in-out infinite;
+}

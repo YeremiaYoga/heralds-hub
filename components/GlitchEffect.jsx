@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import "./glitch.css"; // pastikan animasi glitchBox ada di file ini
+import "./glitch.css";
 
 export default function GlitchEffect({ side = "left" }) {
   const [glitches, setGlitches] = useState([]);
@@ -22,11 +22,16 @@ export default function GlitchEffect({ side = "left" }) {
           return {
             id: Date.now() + i,
             top: `${Math.random() * 90}%`,
-            left: side === "left" ? `${Math.random() * 10}%` : `${90 + Math.random() * 10}%`,
+            left:
+              side === "left"
+                ? `${Math.random() * 10}%`
+                : `${89 + Math.random() * (10 - (width / window.innerWidth * 100))}%`,
             width,
             height,
-            color: ["#ff00ff", "#00ffff", "#ff5555"][Math.floor(Math.random() * 3)],
-            duration: 800,
+            color: ["#ff00ff", "#00ffff", "#ff5555"][
+              Math.floor(Math.random() * 3)
+            ],
+            duration: 1000,
           };
         }
       );
@@ -38,7 +43,7 @@ export default function GlitchEffect({ side = "left" }) {
           setGlitches((prev) => prev.filter((g) => g.id !== glitch.id));
         }, glitch.duration);
       });
-    }, 600);
+    }, 700);
 
     return () => clearInterval(interval);
   }, [side]);
