@@ -10,3 +10,17 @@
 .twinkle-stars {
   animation: twinkle 4s ease-in-out infinite;
 }
+
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate-layer {
+  animation: rotate-slow 60s linear infinite;
+  transform-origin: center center;
+}

@@ -18,7 +18,7 @@ const layers = [
     twinkle: true,
   },
   {
-    src: "/assets/background_inside/layer_6.webp",
+    src: "/assets/background_inside/layer_6.png",
     idle: true,
     idleX: 1,
     idleY: 0,
@@ -67,7 +67,12 @@ export default function LayeredBackground() {
               alt={`layer-${index}`}
               className={`bg-layer absolute top-0 left-0 will-change-transform
         ${layer.twinkle ? "twinkle-stars" : ""}
-        ${isLayer6 ? "object-contain" : "object-cover w-full h-full"}
+        ${
+          isLayer6
+            ? "object-contain rotate-layer h-[150%] w-[150%]"
+            : "object-cover w-full h-full"
+        }
+
       `}
               style={{
                 transform: baseTransform + scaleTransform,

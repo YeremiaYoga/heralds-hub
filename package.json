@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 55123",
     "lint": "next lint"
+    
   },
   "dependencies": {
     "lucide-react": "^0.525.0",
