@@ -1,7 +1,27 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { fetchApps, updateApps } from "@/lib/jsonbin";
+
+const fetchApps = async () => {
+  const res = await fetch("/api/admin/data");
+
+  if (res.status === 401) {
+    window.location.href = "/administrator/login";
+    return [];
+  }
+
+  const json = await res.json();
+
+  return json;
+};
+
+const updateApps = async (apps) => {
+  await fetch("/api/admin/data", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(apps),
+  });
+};
 
 export default function AdminPage() {
   const [apps, setApps] = useState([]);
@@ -13,7 +33,6 @@ export default function AdminPage() {
       const data = await fetchApps();
       setApps(data);
       setLoading(false);
-      console.log(await fetchApps());
     };
 
     load();
@@ -62,9 +81,7 @@ export default function AdminPage() {
                   )}
                 </div>
                 <div>
-                  <label className="block text-sm mb-1 text-gray-300">
-                    Label
-                  </label>
+                  <label className="block text-sm mb-1 text-gray-300">Label</label>
                   <input
                     className="w-full bg-slate-900 border border-slate-700 rounded px-4 py-2"
                     value={app.label}
@@ -74,9 +91,7 @@ export default function AdminPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm mb-1 text-gray-300">
-                    Link
-                  </label>
+                  <label className="block text-sm mb-1 text-gray-300">Link</label>
                   <input
                     className="w-full bg-slate-900 border border-slate-700 rounded px-4 py-2"
                     value={app.link}

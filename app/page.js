@@ -8,7 +8,17 @@ import GlitchEffect from "@/components/GlitchEffect";
 import LayeredBackground from "@/components/LayeredBackground";
 import { apps } from "@/data/apps";
 
-import { fetchApps } from "@/lib/jsonbin";
+// import { fetchApps } from "@/lib/jsonbin";
+
+const fetchApps = async () => {
+  const res = await fetch("/api/apps");
+  if (!res.ok) return [];
+
+  const json = await res.json();
+
+  return json;
+};
+
 export default function DesktopUI() {
   const [apps, setApps] = useState([]);
 
