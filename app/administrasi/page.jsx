@@ -7,7 +7,7 @@ export default async function Page() {
   const session = cookieStore.get('admin_session');
 
   if (!session || session.value !== 'valid') {
-    redirect('/administrator/login');
+    redirect('/administrasi/login');
   }
 
   return <AdminPage />;

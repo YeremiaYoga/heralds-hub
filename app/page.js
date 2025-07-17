@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Coffee } from "lucide-react";
+import { Coffee, Volume2 } from "lucide-react";
 import MilitaryClock from "@/components/MilitaryClock";
 import GlitchEffect from "@/components/GlitchEffect";
 
@@ -134,6 +134,23 @@ export default function DesktopUI() {
               <MilitaryClock />
             </div>
 
+            {/* <div className="flex items-center gap-2 text-yellow-400 mr-4">
+              <Volume2 size={20} />
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                defaultValue="1"
+                onChange={(e) => {
+                  if (audioRef?.current) {
+                    audioRef.current.volume = parseFloat(e.target.value);
+                  }
+                }}
+                className="w-24 accent-yellow-400"
+                title="Volume"
+              />
+            </div> */}
             <a
               href="https://ko-fi.com/candlenote"
               className="flex items-center gap-2 border border-yellow-400 px-4 py-2 rounded hover:bg-yellow-400 hover:text-black transition font-semibold text-2xl"

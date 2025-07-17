@@ -6,7 +6,7 @@ const fetchApps = async () => {
   const res = await fetch("/api/admin/data");
 
   if (res.status === 401) {
-    window.location.href = "/administrator/login";
+    window.location.href = "/administrasi/login";
     return [];
   }
 
