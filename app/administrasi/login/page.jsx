@@ -37,7 +37,7 @@ const handleSubmit = async (e) => {
 
     const data = await res.json();
     if (res.ok) {
-      router.push("/administrator");
+      router.push("/administrasi");
     } else {
       setError(data.message || "Login gagal.");
     }
@@ -49,7 +49,7 @@ const handleSubmit = async (e) => {
 
   return (
     <div className="max-w-sm mx-auto mt-20 p-6 border rounded shadow">
-      <h1 className="text-xl font-bold mb-4">Login Administrator</h1>
+      <h1 className="text-xl font-bold mb-4">Login</h1>
       {error && <p className="text-red-500">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
