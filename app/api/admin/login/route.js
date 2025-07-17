@@ -31,7 +31,7 @@ export async function POST(req) {
     res.cookies.set("admin_session", "valid", {
       httpOnly: true,
       path: "/",
-      maxAge: 600 * 5,
+      maxAge: 60 * 5,
     });
 
     return res;
