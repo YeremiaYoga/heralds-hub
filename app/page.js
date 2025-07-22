@@ -7,6 +7,7 @@ import GlitchEffect from "@/components/GlitchEffect";
 import SocialLinks from "../components/SocialLinks";
 
 import LayeredBackground from "@/components/LayeredBackground";
+import VolumeControl from "@/components/VolumeControl";
 import { apps } from "@/data/apps";
 
 // import { fetchApps } from "@/lib/jsonbin";
@@ -22,6 +23,7 @@ const fetchApps = async () => {
 
 export default function DesktopUI() {
   const [apps, setApps] = useState([]);
+  const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
     fetchApps().then(setApps);
@@ -83,7 +85,21 @@ export default function DesktopUI() {
               <a
                 href={app.link}
                 key={index}
-                onClick={app.glitch ? handleGlitchClick : undefined}
+                onClick={(e) => {
+                  if (app.glitch) {
+                    handleGlitchClick?.(e);
+                  }
+
+                  if (audioRef.current) {
+                    audioRef.current.muted = true;
+                  }
+
+                  if (setIsMuted) {
+                    setIsMuted(true);
+                  }
+
+                  localStorage.setItem("muted", "true");
+                }}
                 className={`flex flex-col items-center space-y-3 group transition-all duration-200 hover:scale-105 ${
                   app.glitch ? "hover:text-red-400" : "hover:text-yellow-300"
                 }`}
@@ -138,23 +154,7 @@ export default function DesktopUI() {
               <MilitaryClock />
             </div>
 
-            <div className="flex items-center gap-2 text-yellow-400 mr-4">
-              <Volume2 size={20} />
-              <input
-                type="range"
-                min="0"
-                max="1"
-                step="0.01"
-                defaultValue="0.5"
-                onChange={(e) => {
-                  if (audioRef?.current) {
-                    audioRef.current.volume = parseFloat(e.target.value);
-                  }
-                }}
-                className="w-24 accent-yellow-400"
-                title="Volume"
-              />
-            </div>
+            <VolumeControl audioRef={audioRef} isMuted={isMuted} setIsMuted={setIsMuted} />
             <a
               href="https://ko-fi.com/candlenote"
               className="flex items-center gap-2 border border-yellow-400 px-4 py-2 rounded hover:bg-yellow-400 hover:text-black transition font-semibold text-2xl"
